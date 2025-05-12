@@ -38,6 +38,7 @@
     feishu
     wget
     neovim
+    pandoc
     kitty
     fastfetch
     firefox
