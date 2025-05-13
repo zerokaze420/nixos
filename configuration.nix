@@ -42,6 +42,7 @@
     kitty
     fastfetch
     firefox
+    gimp
     zed
     wofi
     google-chrome
