@@ -71,7 +71,7 @@
   qt.enable = true;
 
   environment.sessionVariables = {
-    QT_WAYLAND_FORCE_DPI = "144";
+    QT_SCALE_FACTOR = "1.5";
     QT_QPA_PLATFORM = "wayland";
     NIXOS_OZONE_WL = "1";
   };
