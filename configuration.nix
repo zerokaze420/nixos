@@ -50,6 +50,7 @@
     qq
     git
     btop
+    rider
     wpsoffice-cn
 
     telegram-desktop
