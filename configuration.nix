@@ -47,7 +47,7 @@
     google-chrome
 
     dae
-    dotnet-sdk
+    dotnet-sdk_6
 
     qq
     git
