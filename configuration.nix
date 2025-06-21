@@ -49,6 +49,7 @@
     dae
     dotnet-sdk
     dotnetCorePackages.dotnet_8.sdk
+    dotnetCorePackages.dotnet_6.runtime
 
     qq
     git
