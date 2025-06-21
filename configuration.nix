@@ -47,6 +47,8 @@
     wofi
     google-chrome
     dae
+    dotnet-sdk
+
     qq
     git
     btop
