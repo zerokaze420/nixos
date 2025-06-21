@@ -50,8 +50,8 @@
     qq
     git
     btop
-    rider
     wpsoffice-cn
+    jetbrains.rider
 
     telegram-desktop
     waybar
