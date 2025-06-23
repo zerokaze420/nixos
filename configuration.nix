@@ -47,6 +47,7 @@
     google-chrome
 
     dae
+    alacritty
     nodejs
 
     qq
