@@ -47,6 +47,7 @@
     google-chrome
 
     dae
+    nodejs
     dotnet-sdk_6
 
     qq
