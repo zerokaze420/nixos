@@ -69,6 +69,7 @@
     qcm
     youtube-music
     obsidian
+    cursor
     wechat-uos
   ];
   qt.enable = true;
