@@ -48,7 +48,6 @@
 
     dae
     nodejs
-    dotnet-sdk_6
 
     qq
     git
