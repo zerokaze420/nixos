@@ -15,7 +15,8 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   services.xserver.xkb.layout = "us";
-
+  services.displayManager.gdm.enable = true;
+  services.desktopManager.gnome.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
@@ -97,11 +98,6 @@
     swtpm.enable = true;
     ovmf.packages = [pkgs.OVMFFull.fd];
   };
-        services.xserver = {
-  enable = true;
-  displayManager.gdm.enable = true;
-  desktopManager.gnome.enable = true;
-}
 
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;
