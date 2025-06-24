@@ -45,7 +45,7 @@
     zed
     wofi
     google-chrome
-
+    copyq
     cliphist
     dae
     firefox
