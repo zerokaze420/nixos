@@ -46,6 +46,7 @@
     wofi
     google-chrome
 
+    cliphist
     dae
     firefox
     alacritty
