@@ -98,6 +98,7 @@
 
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;
+  i18n.inputMethod.fcitx5.waylandFrontend = true;
   programs.nix-ld.enable = true;
 
   services.nginx = {
