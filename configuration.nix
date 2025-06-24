@@ -97,6 +97,11 @@
     swtpm.enable = true;
     ovmf.packages = [pkgs.OVMFFull.fd];
   };
+        services.xserver = {
+  enable = true;
+  displayManager.gdm.enable = true;
+  desktopManager.gnome.enable = true;
+}
 
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;
