@@ -71,6 +71,7 @@
     starship
     vscode
     qcm
+    direnv
     spotify
 
     youtube-music
