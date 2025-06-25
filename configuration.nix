@@ -71,6 +71,8 @@
     starship
     vscode
     qcm
+    spotify
+
     youtube-music
     obsidian
     code-cursor
