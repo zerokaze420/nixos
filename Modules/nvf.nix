@@ -53,7 +53,6 @@
 
           # Languages that will be supported in default and maximal configurations.
           nix.enable = true;
-          csharp.enable = true;
           markdown.enable = true;
 
           # Languages that are enabled in the maximal configuration.
@@ -79,7 +78,7 @@
           assembly.enable = false;
           astro.enable = false;
           nu.enable = false;
-          csharp.enable = false;
+          csharp.enable = true;
           julia.enable = false;
           vala.enable = false;
           scala.enable = false;
