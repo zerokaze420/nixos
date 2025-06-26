@@ -50,6 +50,7 @@
     cliphist
     dae
     firefox
+    lm_sensors
     alacritty
     nodejs
 
