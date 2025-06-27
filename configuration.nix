@@ -89,6 +89,7 @@
     QT_QPA_PLATFORM = "wayland";
     NIXOS_OZONE_WL = "1";
   };
+  programs.niri.enable = true;
   programs.hyprland = {
     # Install the packages from nixpkgs
     enable = true;
@@ -96,7 +97,6 @@
     xwayland.enable = true;
   };
   programs.fish.enable = true;
-  programs.niri.enable = true
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
