@@ -47,7 +47,6 @@
     wofi
     google-chrome
     copyq
-    niri
     brave
     cliphist
     dae
@@ -97,6 +96,7 @@
     xwayland.enable = true;
   };
   programs.fish.enable = true;
+  programs.niri.enable = true
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
 
