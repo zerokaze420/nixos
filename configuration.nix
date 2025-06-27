@@ -33,6 +33,9 @@
   ];
 
   environment.systemPackages = with pkgs; [
+    mpd
+    ncmpcpp
+    cava
     hyprshot
     zed-editor
     feishu
