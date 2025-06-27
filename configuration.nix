@@ -53,6 +53,7 @@
     firefox
     lm_sensors
     alacritty
+    fuzzel
     nodejs
 
     qq
