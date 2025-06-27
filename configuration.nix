@@ -47,6 +47,7 @@
     wofi
     google-chrome
     copyq
+    niri
     brave
     cliphist
     dae
