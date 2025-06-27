@@ -49,6 +49,7 @@
     zed
     wofi
     google-chrome
+    python
     copyq
     brave
     cliphist
