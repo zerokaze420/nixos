@@ -17,6 +17,10 @@
   services.xserver.xkb.layout = "us";
   services.displayManager.gdm.enable = true;
   services.desktopManager.gnome.enable = true;
+  services.xserver.enable = true; # optional
+  services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = true;
+  services.desktopManager.plasma6.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
@@ -49,7 +53,6 @@
     zed
     wofi
     google-chrome
-    python
     copyq
     brave
     cliphist
