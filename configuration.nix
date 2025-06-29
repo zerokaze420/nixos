@@ -15,8 +15,6 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
   services.xserver.xkb.layout = "us";
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
   services.xserver.enable = true; # optional
   services.displayManager.sddm.enable = true;
   services.displayManager.sddm.wayland.enable = true;
