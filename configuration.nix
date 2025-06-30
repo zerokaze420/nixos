@@ -47,6 +47,7 @@
     fastfetch
     firefox
     gimp
+    chatbox
     zed
     wofi
     google-chrome
