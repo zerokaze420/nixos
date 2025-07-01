@@ -71,6 +71,7 @@
     waybar
     noto-fonts
     dunst
+    jetbrains.clion
     noto-fonts-emoji
     qemu
     libvirt
