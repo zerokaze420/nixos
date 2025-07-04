@@ -55,7 +55,7 @@
     brave
     gemini-cli
     cliphist
-    dae
+    daed
     firefox
     lm_sensors
     alacritty
