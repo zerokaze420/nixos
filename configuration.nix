@@ -47,6 +47,7 @@
     kitty
     fastfetch
     firefox
+    yazi
     gimp
     chatbox
     zed
