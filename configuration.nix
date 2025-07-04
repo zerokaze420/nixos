@@ -53,6 +53,7 @@
     google-chrome
     copyq
     brave
+    gemini-cli
     cliphist
     dae
     firefox
