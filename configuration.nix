@@ -47,6 +47,7 @@
     kitty
     fastfetch
     firefox
+    cf-tool
     yazi
     gimp
     chatbox
