@@ -71,6 +71,7 @@
     jetbrains.rider
 
     telegram-desktop
+    cpeditor
     waybar
     noto-fonts
     dunst
