@@ -43,6 +43,7 @@
     feishu
     wget
     neovim
+    ventoy
     pandoc
     kitty
     fastfetch
