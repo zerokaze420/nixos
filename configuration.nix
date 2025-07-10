@@ -71,6 +71,7 @@
     wpsoffice-cn
     jetbrains.rider
 
+    ladybird
     telegram-desktop
     cpeditor
     waybar
