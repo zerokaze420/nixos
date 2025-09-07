@@ -16,7 +16,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
-  services.xserver.displayManager.gdm.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
@@ -39,7 +38,6 @@
     cava
     hyprshot
     zed-editor
-    feishu
     wget
     neovim
     kitty
@@ -50,9 +48,7 @@
     chatbox
     zed
     wofi
-    google-chrome
     copyq
-    brave
     gemini-cli
     cliphist
     daed
@@ -68,19 +64,14 @@
     telegram-desktop
     cpeditor
     waybar
-    noto-fonts
     dunst
-    noto-fonts-emoji
     qemu
     libvirt
     virt-manager
-    discord
     starship
     vscode
     bun
     direnv
-    obsidian
-    wechat-uos
   ];
   qt.enable = true;
 
@@ -171,7 +162,6 @@
   #   ];
   # };
 
-  programs.firefox.enable = true;
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget
