@@ -17,7 +17,6 @@
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
   fonts.packages = with pkgs; [
@@ -43,11 +42,9 @@
     feishu
     wget
     neovim
-    pandoc
     kitty
     fastfetch
     firefox
-    cf-tool
     yazi
     gimp
     chatbox
@@ -67,15 +64,12 @@
     qq
     git
     btop
-    wpsoffice-cn
-    jetbrains.rider
     ladybird
     telegram-desktop
     cpeditor
     waybar
     noto-fonts
     dunst
-    jetbrains.clion
     noto-fonts-emoji
     qemu
     libvirt
@@ -85,10 +79,7 @@
     vscode
     bun
     direnv
-    spotify
-    youtube-music
     obsidian
-    code-cursor
     wechat-uos
   ];
   qt.enable = true;
@@ -99,7 +90,6 @@
     GOOGLE_CLOUD_PROJECT = "740117566518";
     NIXOS_OZONE_WL = "1";
   };
-  programs.niri.enable = true;
   programs.hyprland = {
     # Install the packages from nixpkgs
     enable = true;
