@@ -43,7 +43,6 @@
     feishu
     wget
     neovim
-    ventoy
     pandoc
     kitty
     fastfetch
@@ -65,13 +64,11 @@
     alacritty
     fuzzel
     nodejs
-
     qq
     git
     btop
     wpsoffice-cn
     jetbrains.rider
-
     ladybird
     telegram-desktop
     cpeditor
@@ -90,7 +87,6 @@
     bun
     direnv
     spotify
-
     youtube-music
     obsidian
     code-cursor
@@ -126,23 +122,6 @@
   i18n.inputMethod.fcitx5.waylandFrontend = true;
   programs.nix-ld.enable = true;
 
-  services.nginx = {
-    enable = true;
-
-    virtualHosts."localhost" = {
-      # 監聽 80 端口是默認行為，可以不顯式指定
-      # listen = [{ addr = "0.0.0.0"; port = 80; }]; # 可選
-
-      locations."/" = {
-        proxyPass = "http://192.168.122.141:8000";
-        extraConfig = ''
-                proxy_set_header Host $host;
-          proxy_set_header X-Real-IP $remote_addr;
-          proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        '';
-      };
-    };
-  };
 
   networking.hostName = "nixos"; # Define your hostname.
   # Pick only one of the below networking options.
