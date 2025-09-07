@@ -207,11 +207,7 @@
   # boot.loader.grub.configurationLimit = 10;
 
   # do garbage collection weekly to keep disk usage low
-  nix.gc = {
-    automatic = true;
-    dates = "weekly";
-    options = "--delete-older-than 1w";
-  };
+ 
 
   # Optimise storage
   # you can also optimise the store manually via:
