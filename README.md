@@ -1,10 +1,8 @@
 # flake.nix
 
+My Nixos Configuration
 
-我的的NIXOS 配置 
-
-
-## 如何使用
+## How to Use
 
 ```nix
 sudo nixos-generate-config --show-hardware-config > hardware-configuration.nix
