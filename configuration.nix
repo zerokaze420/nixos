@@ -83,7 +83,6 @@
     discord
     starship
     vscode
-    qcm
     bun
     direnv
     spotify
