@@ -37,7 +37,6 @@
     dae
     cava
     hyprshot
-    zed-editor
     wget
     neovim
     kitty
@@ -45,23 +44,17 @@
     firefox
     yazi
     gimp
-    chatbox
-    zed
     wofi
     copyq
     gemini-cli
     cliphist
     daed
-    firefox
     lm_sensors
     alacritty
     fuzzel
     nodejs
-    qq
     git
     btop
-    ladybird
-    telegram-desktop
     cpeditor
     waybar
     dunst
@@ -69,7 +62,6 @@
     libvirt
     virt-manager
     starship
-    vscode
     bun
     direnv
   ];
