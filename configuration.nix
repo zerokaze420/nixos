@@ -12,8 +12,12 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  
+  boot.loader.grub.enable = true;
+  boot.loader.grub.version = 2; # 通常是 2
+  boot.loader.grub.efiSupport = true; # 如果你的系统是 UEFI 模式
+  boot.loader.grub.device = "nodev"; # 对于 UEFI 系统，通常不需要指定设备
+
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
