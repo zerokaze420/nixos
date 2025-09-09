@@ -13,10 +13,10 @@
 
   # Use the systemd-boot EFI boot loader.
   
-  boot.loader.grub.enable = true;
-  boot.loader.grub.version = 2; # 通常是 2
-  boot.loader.grub.efiSupport = true; # 如果你的系统是 UEFI 模式
-  boot.loader.grub.device = "nodev"; # 对于 UEFI 系统，通常不需要指定设备
+boot.loader.systemd-boot.enable = false;
+boot.loader.grub.enable = true;
+boot.loader.grub.efiSupport = true; # Important for UEFI systems
+boot.loader.efi.canTouchEfiVariables = true; # Still needed for GRUB to manage EFI variables
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
@@ -110,7 +110,7 @@
 
   i18n.defaultLocale = "zh_CN.UTF-8";
 
-dio.enable = false; # Use Pipewire, the modern sound subsystem
+   dio.enable = false; # Use Pipewire, the modern sound subsystem
 
   security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
 
