@@ -48,9 +48,7 @@
     gimp
     wofi
     copyq
-    gemini-cli
     cliphist
-    daed
     lm_sensors
     alacritty
     fuzzel
