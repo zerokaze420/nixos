@@ -100,8 +100,7 @@ boot.loader.efi.canTouchEfiVariables = true; # Still needed for GRUB to manage E
 
 
   networking.hostName = "nixos"; # Define your hostname.
-  # Pick only one of the below networking options.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
 
   # Set your time zone.
@@ -110,7 +109,6 @@ boot.loader.efi.canTouchEfiVariables = true; # Still needed for GRUB to manage E
 
   i18n.defaultLocale = "zh_CN.UTF-8";
 
-   dio.enable = false; # Use Pipewire, the modern sound subsystem
 
   security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
 
