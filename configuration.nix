@@ -12,12 +12,9 @@
   ];
 
   # Use the systemd-boot EFI boot loader.
-  
-boot.loader.systemd-boot.enable = false;
-boot.loader.grub.efiSupport = true; # Important for UEFI systems
-boot.loader.grub.enable = true;
-boot.loader.grub.device = "nodev";  # 表示不绑定到特定块设备，用于 EFI
-boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.grub.enable = true;
+  boot.loader.grub.device = "/dev/vda";
+  boot.loader.grub.efiSupport = false;
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
