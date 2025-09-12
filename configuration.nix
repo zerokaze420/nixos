@@ -13,8 +13,13 @@
 
   # Use the systemd-boot EFI boot loader.
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-  boot.loader.grub.efiSupport = false;
+
+  # 自动判断是否为 UEFI：如果是，则使用 EFI 支持并设置为 ESP 分区；否则使用 MBR 设备
+  boot.loader.grub.efiSupport = if boot.isEfi then true else false;
+ 
+ # 如果是 UEFI，GRUB 安装到 EFI 系统分区（通常是 /dev/vda，但实际由 EFI 机制处理）
+ # 如果是 BIOS，安装到 MBR 设备
+  boot.loader.grub.device = if boot.isEfi then "nodev" else "/dev/vda";
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
