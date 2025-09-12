@@ -13,11 +13,11 @@
 
   boot.loader.grub.enable = true;
 
-  # 使用 config.boot.isEfi 来判断是否是 UEFI
-  boot.loader.grub.efiSupport = if config.boot.isEfi then true else false;
+  # 使用正确的选项：boot.efi，不是 boot.isEfi
+  boot.loader.grub.efiSupport = if config.boot.efi then true else false;
 
   # 根据是否 UEFI 设置设备
-  boot.loader.grub.device = if config.boot.isEfi then "nodev" else "/dev/vda";
+  boot.loader.grub.device = if config.boot.efi then "nodev" else "/dev/vda";
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
