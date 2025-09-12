@@ -11,15 +11,11 @@
     ./hardware-configuration.nix
   ];
 
-   # 启用 GRUB
-  boot.loader.grub.enable = true;
-
-  # 根据是否 UEFI 设置 GRUB 模式
-  boot.loader.grub.efiSupport = if config.boot.efi then true else false;
-  boot.loader.grub.device = if config.boot.efi then "nodev" else "/dev/vda";
-
-  # 🔥 关键：启用自动检测和挂载 EFI 系统分区（推荐！）
-  boot.loader.efi.efiSysMountPoint = "/boot/efi";  # 挂载点固定即可
+  boot.loader.grub = {
+    enable     = true;
+    efiSupport = true;
+    device     = "nodev";
+  };
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
