@@ -11,11 +11,7 @@
     ./hardware-configuration.nix
   ];
 
-  boot.loader.grub = {
-    enable     = true;
-    efiSupport = true;
-    device     = "nodev";
-  };
+
 
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
