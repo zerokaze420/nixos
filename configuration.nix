@@ -22,7 +22,7 @@
   services.xserver.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
-  services.displayManager.sddm.enable = true;
+  services.xserver.displayManager.gdm.enable = true;
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -99,12 +99,8 @@
 
 
   networking.hostName = "nixos"; # Define your hostname.
-
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
-
   time.timeZone = "Asia/Shanghai";
-
-
   i18n.defaultLocale = "zh_CN.UTF-8";
 
 
@@ -117,9 +113,6 @@
     pulse.enable = true;
 
   };
-
-
-
 
 
   nix.settings.auto-optimise-store = true;
