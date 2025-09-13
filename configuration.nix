@@ -19,13 +19,16 @@
   };
 
   services.xserver.xkb.layout = "us";
+
+  
   services.xserver.enable = true;
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.theme = "minesddm";
+
+
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
-  services.displayManager.sddm = {
-                  enable = true;
-                  theme = "minesddm";
-  };
+ 
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
