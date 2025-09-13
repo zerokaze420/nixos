@@ -22,7 +22,7 @@
   services.xserver.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
-  services.xserver.displayManager.gdm.enable = true;
+  services.xserver.displayManager.sddm.enable =true;
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
