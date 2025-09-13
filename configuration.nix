@@ -13,8 +13,6 @@
     boot.loader = {
     system.enable = true; # 确保 systemd-boot 被启用
     system.efiSupport = true; # 如果是 EFI 系统
-    system.efiInstallAsDefault = true; # 推荐，它会尝试安装为默认引导项
-
   };
 
   services.xserver.xkb.layout = "us";
