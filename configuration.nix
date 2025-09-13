@@ -10,9 +10,12 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-    boot.loader = {
-    system.enable = true; # 确保 systemd-boot 被启用
-    system.efiSupport = true; # 如果是 EFI 系统
+
+ boot.loader = {
+    systemd-boot.enable = true;
+    # 如果你的系统是 UEFI 并且你想要 systemd-boot 能够管理 EFI 引导项，请启用此项。
+    # NixOS 通常会自动检测并安装 systemd-boot 到 EFI 系统分区 (ESP)。
+    efi.canTouchEfiVariables = true;
   };
 
   services.xserver.xkb.layout = "us";
