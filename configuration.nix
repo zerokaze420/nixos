@@ -10,7 +10,11 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
+<<<<<<< HEAD
   boot.kernelPackages = pkgs.linuxPackages_xanmod;
+=======
+
+>>>>>>> 99e86412b2fde577b59d5a8ff56fb087913f3cb1
   boot.loader = {
     systemd-boot.enable = true;
     # 如果你的系统是 UEFI 并且你想要 systemd-boot 能够管理 EFI 引导项，请启用此项。
