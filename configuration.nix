@@ -10,7 +10,7 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-
+  boot.kernelPackages = pkgs.linuxPackages_xanmod;
   boot.loader = {
     systemd-boot.enable = true;
     # 如果你的系统是 UEFI 并且你想要 systemd-boot 能够管理 EFI 引导项，请启用此项。
@@ -48,6 +48,7 @@
     cava
     hyprshot
     wget
+    qq
     neovim
     kitty
     fastfetch
