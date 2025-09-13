@@ -47,6 +47,8 @@
     dae
     cava
     hyprshot
+    vscode
+    nixfmt
     wget
     qq
     neovim
