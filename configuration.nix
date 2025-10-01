@@ -10,9 +10,8 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
-  boot.loader = {
+ boot.loader = {
     systemd-boot.enable = true;
     # 如果你的系统是 UEFI 并且你想要 systemd-boot 能够管理 EFI 引导项，请启用此项。
     # NixOS 通常会自动检测并安装 systemd-boot 到 EFI 系统分区 (ESP)。
@@ -21,14 +20,13 @@
 
   services.xserver.xkb.layout = "us";
 
+
   services.xserver.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
-  services.displayManager.sddm.theme = "minesddm";
+
 
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
-
+ 
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
@@ -48,10 +46,7 @@
     dae
     cava
     hyprshot
-    vscode
-    nixfmt
     wget
-    qq
     neovim
     kitty
     fastfetch
@@ -106,10 +101,12 @@
   i18n.inputMethod.fcitx5.waylandFrontend = true;
   programs.nix-ld.enable = true;
 
+
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   time.timeZone = "Asia/Shanghai";
-  i18n.defaultLocale = "zh_CN.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
+
 
   security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
 
@@ -118,7 +115,9 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+
   };
+
 
   nix.settings.auto-optimise-store = true;
 

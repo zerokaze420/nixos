@@ -8,18 +8,13 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-      minesddm = {
-      url = "github:Davi-S/sddm-theme-minesddm";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
   outputs = {
     self,
     nixpkgs,
     nvf,
-    home-manager,
-    minesddm,
+    home-manager,    
     ...
   }: let
     system = "x86_64-linux";
@@ -33,9 +28,7 @@
         ./Modules/inputMethod.nix
         ./Modules/nh.nix
         ./Modules/nvf.nix
-        # ./Modules/nvf/configuration.nix
         nvf.nixosModules.default
-        minesddm.nixosModules.default
         home-manager.nixosModules.home-manager
         {
           home-manager = {
