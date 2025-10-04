@@ -52,6 +52,7 @@
     qemu
     libvirt
     virt-manager
+    tmux
     starship
     bun
     direnv
