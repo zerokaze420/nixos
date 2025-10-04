@@ -45,6 +45,7 @@
     alacritty
     fuzzel
     nodejs
+    android-tools
     git
     btop
     waybar
