@@ -17,7 +17,7 @@
     # NixOS 通常会自动检测并安装 systemd-boot 到 EFI 系统分区 (ESP)。
     efi.canTouchEfiVariables = true;
   };
-
+  boot.kernelPackages =  pkgs.linuxPackages_zen;
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
