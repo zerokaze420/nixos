@@ -40,7 +40,6 @@
     kitty
     fastfetch
     firefox
-    yazi
     copyq
     cliphist
     alacritty
