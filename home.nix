@@ -5,7 +5,6 @@
   
   imports = [ 
     ./homeModules/git.nix
-    ./homeModules/nvf.nix
     ./homeModules/shell/fish.nix
     ./homeModules/shell/starship.nix    
    ];

@@ -19,7 +19,6 @@
   };
 
   services.xserver.xkb.layout = "us";
-
   services.xserver.enable = true;
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
@@ -42,15 +41,14 @@
     ncmpcpp
     dae
     cava
-    hyprshot
     wget
     neovim
+    vscode
     kitty
     fastfetch
     firefox
     yazi
     gimp
-    wofi
     copyq
     cliphist
     lm_sensors
@@ -59,7 +57,6 @@
     nodejs
     git
     btop
-    cpeditor
     waybar
     dunst
     qemu
