@@ -55,7 +55,9 @@
     mpd
     ncmpcpp
     dae
+    swww
     wget
+    aria2
     neovim
     kitty
     fastfetch
