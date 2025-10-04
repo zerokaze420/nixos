@@ -23,7 +23,6 @@
         ./Modules/services/ssh.nix
         ./Modules/services/dae.nix
         ./Modules/user/tux.nix
-        ./Modules/inputMethod.nix
         ./Modules/nh.nix
         home-manager.nixosModules.home-manager
         {
