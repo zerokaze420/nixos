@@ -1,5 +1,3 @@
-# your system. Help is available in the configuration.nix(5) man page, on
-# https://search.nixos.org/options and in the NixOS manual (`nixos-help`).
 {
   config,
   lib,
@@ -7,14 +5,11 @@
   ...
 }: {
   imports = [
-    # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
 
   boot.loader = {
     systemd-boot.enable = true;
-    # 如果你的系统是 UEFI 并且你想要 systemd-boot 能够管理 EFI 引导项，请启用此项。
-    # NixOS 通常会自动检测并安装 systemd-boot 到 EFI 系统分区 (ESP)。
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages =  pkgs.linuxPackages_zen;
@@ -40,7 +35,6 @@
     mpd
     ncmpcpp
     dae
-    cava
     wget
     neovim
     vscode
@@ -48,10 +42,8 @@
     fastfetch
     firefox
     yazi
-    gimp
     copyq
     cliphist
-    lm_sensors
     alacritty
     fuzzel
     nodejs
@@ -75,9 +67,7 @@
     NIXOS_OZONE_WL = "1";
   };
   programs.niri = {
-    # Install the packages from nixpkgs
     enable = true;
-    # Whether to enable XWayland
   };
   programs.fish.enable = true;
   virtualisation.libvirtd.enable = true;
