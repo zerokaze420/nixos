@@ -10,7 +10,6 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
   ];
-  boot.kernelPackages = pkgs.linuxPackages_xanmod;
 
   boot.loader = {
     systemd-boot.enable = true;
@@ -22,8 +21,6 @@
   services.xserver.xkb.layout = "us";
 
   services.xserver.enable = true;
-
-
   nix.settings.experimental-features = ["nix-command" "flakes"];
   nixpkgs.config.allowUnfree = true;
 
@@ -46,10 +43,7 @@
     dae
     cava
     hyprshot
-    vscode
-    nixfmt
     wget
-    qq
     neovim
     kitty
     fastfetch
@@ -83,11 +77,10 @@
     GOOGLE_CLOUD_PROJECT = "740117566518";
     NIXOS_OZONE_WL = "1";
   };
-  programs.hyprland = {
+  programs.niri = {
     # Install the packages from nixpkgs
     enable = true;
     # Whether to enable XWayland
-    xwayland.enable = true;
   };
   programs.fish.enable = true;
   virtualisation.libvirtd.enable = true;
@@ -107,7 +100,7 @@
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   time.timeZone = "Asia/Shanghai";
-  i18n.defaultLocale = "zh_CN.UTF-8";
+  i18n.defaultLocale = "en_US.UTF-8";
 
   security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
 

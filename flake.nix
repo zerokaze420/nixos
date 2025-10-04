@@ -8,7 +8,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
   };
 
   outputs = {
@@ -29,7 +28,6 @@
         ./Modules/inputMethod.nix
         ./Modules/nh.nix
         ./Modules/nvf.nix
-        # ./Modules/nvf/configuration.nix
         nvf.nixosModules.default
         home-manager.nixosModules.home-manager
         {
