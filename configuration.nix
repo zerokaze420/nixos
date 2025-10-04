@@ -37,7 +37,6 @@
     dae
     wget
     neovim
-    vscode
     kitty
     fastfetch
     firefox
