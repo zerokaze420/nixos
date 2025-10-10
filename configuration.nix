@@ -58,7 +58,6 @@
     swww
     wget
     aria2
-    vscode
     neovim
     usbutils
     kitty

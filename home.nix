@@ -6,6 +6,7 @@
   imports = [ 
     ./homeModules/git.nix
     ./homeModules/shell/fish.nix
+    ./homeModules/vscode.nix
     ./homeModules/shell/starship.nix    
    ];
   # 安装用户级软件包
