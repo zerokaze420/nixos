@@ -1,7 +1,7 @@
 {config, pkgs, ... }:
 {
   programs.git = {
-    enable = true;
+    enable = true; 
     userName = "erfu81856";
     userEmail = "erfu81856@openatom.club";
   };
