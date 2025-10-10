@@ -62,6 +62,7 @@
     neovim
     usbutils
     kitty
+    feishu
     fastfetch
     firefox
     copyq
