@@ -79,6 +79,7 @@
     bun
     direnv
   ];
+  
   qt.enable = true;
 
   environment.sessionVariables = {
