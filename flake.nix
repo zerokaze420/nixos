@@ -1,44 +1,55 @@
 {
-  description = "A very basic flake";
+  description = "一个基础 Flake";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    
+    dankMaterialShell = {
+      url = "github:AvengeMedia/DankMaterialShell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }: let
-    system = "x86_64-linux";
-  in {
-    nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, dankMaterialShell, niri, ... }@inputs: {
+    nixosConfigurations.nixos = let
+      system = "x86_64-linux";
+      
+    in nixpkgs.lib.nixosSystem { 
+      inherit system;
       modules = [
         ./configuration.nix
         ./Modules/services/ssh.nix
         ./Modules/services/dae.nix
         ./Modules/user/tux.nix
         ./Modules/nh.nix
+
+        {
+          nixpkgs.overlays = [
+            niri.overlays.niri 
+          ];
+          
+        }
+        
         home-manager.nixosModules.home-manager
         {
           home-manager = {
-            useGlobalPkgs = true;
+            useGlobalPkgs = true; 
             useUserPackages = true;
-            # 用户配置必须以「模块的集合」(Attribute Set)形式定义
-            users.tux = {
-              imports = [
-                ./home.nix # 确保此文件返回 attribute set
-                # 正确注入 nixvim 的模块
-              ];
-            };
+            users.tux = { imports = [ ./home.nix ]; }; 
           };
         }
       ];
+      specialArgs = { inherit inputs niri; };
     };
   };
 }

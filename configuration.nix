@@ -2,10 +2,12 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }: {
   imports = [
     ./hardware-configuration.nix
+    inputs.niri.nixosModules.niri
   ];
 
   boot.loader = {
@@ -88,12 +90,13 @@
     GOOGLE_CLOUD_PROJECT = "740117566518";
     NIXOS_OZONE_WL = "1";
   };
-  programs.niri = {
-    enable = true;
-  };
   programs.fish.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
+  programs.niri = {
+    enable = true;
+    package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+  };
 
   # Enable TPM emulation (optional)
   virtualisation.libvirtd.qemu = {
