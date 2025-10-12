@@ -16,6 +16,7 @@
     neovide
     kitty
     firefox
+    telegram-desktop
   ];
 
   # 配置程序
