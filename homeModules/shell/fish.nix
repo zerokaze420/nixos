@@ -6,6 +6,7 @@
     	interactiveShellInit = ''
       	set fish_greeting # Disable greeting
       	starship init fish | source
+		alias top="htop"
     	'';
   };
 

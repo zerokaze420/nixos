@@ -60,6 +60,7 @@
     aria2
     neovim
     usbutils
+    feishu
     fastfetch
     copyq
     cliphist
@@ -79,7 +80,6 @@
     bun
     direnv
   ];
-  
   qt.enable = true;
 
   environment.sessionVariables = {

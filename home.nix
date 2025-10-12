@@ -8,13 +8,12 @@
     ./homeModules/shell/fish.nix
     ./homeModules/vscode.nix
     ./homeModules/shell/starship.nix    
+    ./homeModules/desktop/kitty.nix
    ];
   # 安装用户级软件包
   home.packages = with pkgs; [
     htop
-    # neovim
     neovide
-    kitty
     firefox
     telegram-desktop
   ];
