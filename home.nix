@@ -14,6 +14,7 @@
     htop
     # neovim
     neovide
+    kitty
     firefox
   ];
 

@@ -60,7 +60,6 @@
     aria2
     neovim
     usbutils
-    kitty
     fastfetch
     copyq
     cliphist
