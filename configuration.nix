@@ -61,7 +61,6 @@
     neovim
     usbutils
     kitty
-    feishu
     fastfetch
     copyq
     cliphist
