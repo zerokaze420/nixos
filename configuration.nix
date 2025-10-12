@@ -63,7 +63,6 @@
     kitty
     feishu
     fastfetch
-    firefox
     copyq
     cliphist
     alacritty

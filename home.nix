@@ -14,6 +14,7 @@
     htop
     # neovim
     neovide
+    firefox
   ];
 
   # 配置程序
