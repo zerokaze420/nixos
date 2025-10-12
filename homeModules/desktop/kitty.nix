@@ -1,6 +1,6 @@
 {config, pkgs,...}:
 {
     programs.kitty = {
-    enable = true;
+        enable = true;
     };
 }
