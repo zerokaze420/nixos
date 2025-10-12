@@ -66,7 +66,6 @@
     fastfetch
     copyq
     cliphist
-    alacritty
     fuzzel
     nodejs
     android-tools
