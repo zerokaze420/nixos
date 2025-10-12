@@ -12,6 +12,8 @@
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
 
+
+
   ];
 
   # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.
@@ -21,6 +23,7 @@
     firefox
     telegram-desktop
   ];
+  programs.dankMaterialShell.enable = true;
 
 
 

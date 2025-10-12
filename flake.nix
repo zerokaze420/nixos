@@ -33,6 +33,7 @@
         ./Modules/user/tux.nix
         ./Modules/nh.nix
 
+
         {
           nixpkgs.overlays = [
             niri.overlays.niri 
@@ -45,7 +46,12 @@
           home-manager = {
             useGlobalPkgs = true; 
             useUserPackages = true;
-            users.tux = { imports = [ ./home.nix ]; }; 
+            users.tux = { imports = [ 
+	    ./home.nix 
+	    inputs.dankMaterialShell.homeModules.dankMaterialShell.default
+  	    inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
+	    ]; }; 
+	    extraSpecialArgs = { inherit inputs; };
           };
         }
       ];

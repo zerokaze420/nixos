@@ -3,6 +3,7 @@
   lib,
   pkgs,
   inputs,
+  niri,
   ...
 }: {
   imports = [
@@ -96,6 +97,7 @@
   programs.niri = {
     enable = true;
     package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+
   };
 
   # Enable TPM emulation (optional)
