@@ -4,7 +4,7 @@
   ...
 }: {
   services.daed = {
-    enable = false;
+    enable = true;
     configFile = "/home/tux/config/dae/config.dae";
   };
 }
