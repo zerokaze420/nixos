@@ -23,6 +23,7 @@
     firefox
     telegram-desktop
     chatbox
+    rustup
   ];
   programs.dankMaterialShell.enable = true;
 
