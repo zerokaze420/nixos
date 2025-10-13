@@ -3,8 +3,8 @@
   pkgs,
   ...
 }: {
-  services.dae = {
-    enable = true;
+  services.daed = {
+    enable = false;
     configFile = "/home/tux/config/dae/config.dae";
   };
 }

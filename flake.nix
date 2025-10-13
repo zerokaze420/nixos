@@ -29,7 +29,7 @@
       modules = [
         ./configuration.nix
         ./Modules/services/ssh.nix
-        ./Modules/services/dae.nix
+        ./Modules/services/daed.nix
         ./Modules/user/tux.nix
         ./Modules/nh.nix
 
