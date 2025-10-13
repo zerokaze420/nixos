@@ -24,6 +24,7 @@
     telegram-desktop
     chatbox
     rustup
+    youtube-music
   ];
   programs.dankMaterialShell.enable = true;
 
