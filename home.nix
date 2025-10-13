@@ -22,6 +22,7 @@
     neovide
     firefox
     telegram-desktop
+    chat-box
   ];
   programs.dankMaterialShell.enable = true;
 
