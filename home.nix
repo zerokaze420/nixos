@@ -25,6 +25,9 @@
     chatbox
     rustup
     youtube-music
+    grim
+    slurp
+    wl-clipboard
   ];
   programs.dankMaterialShell.enable = true;
 
