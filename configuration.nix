@@ -62,7 +62,6 @@
     aria2
     neovim
     usbutils
-    feishu
     fastfetch
     copyq
     cliphist
