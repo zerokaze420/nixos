@@ -28,6 +28,15 @@
     grim
     slurp
     wl-clipboard
+       ((feishu.override (previous: {
+        commandLineArgs = (previous.commandLineArgs or "") +
+          " --enable-features=UseOzonePlatform,WaylandWindowDecorations --ozone-platform=x11 --enable-wayland-ime";
+      })).overrideAttrs (previous: {
+        installPhase = previous.installPhase + ''
+
+          sed -i "s/export XDG_DATA_DIRS/export XDG_DATA_DIRS; GTK_IM_MODULE=; export GTK_IM_MODULE/" $out/opt/bytedance/feishu/feishu
+        '';
+      }))
   ];
   programs.dankMaterialShell.enable = true;
 
