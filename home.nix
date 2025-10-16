@@ -28,6 +28,7 @@
     grim
     slurp
     wl-clipboard
+    gemini-cli
       (feishu.override {
         commandLineArgs = [
           "--ozone-platform-hint=auto"
