@@ -19,6 +19,8 @@ jobs:
       - name: Install Nix and Setup Caching
         uses: cachix/install-nix-action@v22
         with:
+          # 修复 Nix 版本过低导致的错误：强制安装 2.20.0 版本
+          nix_version: '2.20.0'
           nix_path: nixpkgs=channel:nixos-unstable
           cache-nix-paths: true
 
@@ -26,7 +28,7 @@ jobs:
         run: nix flake update
 
       # 验证构建：使用您的主机名 'nixos' 确保更新后的依赖不会破坏构建
-      - name: Verify Build 
+      - name: Verify Build (Host: nixos)
         run: nix build .#nixosConfigurations.nixos.config.system.build.toplevel
 
       - name: Commit changes
