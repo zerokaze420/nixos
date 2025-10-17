@@ -19,8 +19,7 @@ jobs:
       - name: Install Nix and Setup Caching
         uses: cachix/install-nix-action@v22
         with:
-          # 修复 Nix 版本过低导致的错误：强制安装 2.20.0 版本
-          nix_version: '2.20.0'
+          # 不指定 nix_version，Action 将自动安装当时最新的稳定版 Nix
           nix_path: nixpkgs=channel:nixos-unstable
           cache-nix-paths: true
 
