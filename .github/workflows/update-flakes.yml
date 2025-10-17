@@ -4,7 +4,7 @@ on:
   schedule:
     - cron: '0 0 * * *'
   workflow_dispatch:
-  # ⭐ 新增：在推送到 main 分支时运行工作流
+  # 在推送到 main 分支时运行工作流
   push:
     branches:
       - main
@@ -16,7 +16,7 @@ jobs:
     permissions:
       contents: write 
     
-    # 设置 NIX_CONFIG 环境变量，启用实验性功能
+    # 设置 NIX_CONFIG 环境变量，启用实验性功能（对所有 Nix 命令有效）
     env:
       NIX_CONFIG: "extra-experimental-features = nix-command flakes"
 
@@ -24,26 +24,37 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install Nix (Manual Script)
-        # 使用安装脚本以确保获取到最新的 Nix 版本
-        run: |
-          curl -L https://nixos.org/nix/install | sh
-          # 将 Nix profile 路径添加到 PATH 中，以供后续步骤使用
-          echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
-          # 重新加载环境，确保 'nix' 可用
-          . $HOME/.nix-profile/etc/profile.d/nix.sh
+      # ⭐ 已移除 nix_version: '2.20.4'。Action 将自动安装最新稳定版本。
+      - name: Install Nix and Setup Caching
+        uses: cachix/install-nix-action@v22
+        with:
+          # 启用 GitHub Actions 缓存，加速后续构建并节省磁盘空间
+          cache-nix-paths: true 
+          # 使用不稳定的 channel
+          nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Install and Configure Cachix
+      # 清理步骤仍然保留，以在关键构建前最大限度释放运行器空间
+      - name: Free up Disk Space
         run: |
-          # 1. 安装 Cachix CLI 工具
-          nix-env -iA cachix -f https://cachix.org/api/v1/install
+          echo "Disk space before cleanup:"
+          df -h /
+          # 清理 apt 缓存和不再需要的系统依赖
+          sudo apt-get autoremove --purge -y
+          sudo apt-get clean
+          # 运行 Nix 垃圾回收，删除所有不再被任何根目录引用的路径
+          nix-collect-garbage -d
+          echo "Disk space after cleanup:"
+          df -h /
+
+      - name: Configure Personal Cachix (zerokaze420)
+        run: |
+          # Action 已经安装了 Cachix CLI，此处直接配置缓存
           
-          # 2. 配置您的个人缓存 (zerokaze420)。这会自动设置拉取所需的公共密钥。
-          # 官方 NixOS 缓存（cache.nixos.org）通常会被 Nix 安装脚本自动配置。
+          # 1. 配置您的个人缓存 (zerokaze420)。这会自动设置拉取所需的公共密钥。
           echo "Setting up personal cache (zerokaze420) for pushing/pulling..."
           cachix use zerokaze420
           
-          # 3. 认证：使用 GitHub Secrets 提供的令牌进行身份验证，以便推送到您的缓存
+          # 2. 认证：使用 GitHub Secrets 提供的令牌进行身份验证，以便推送到您的缓存
           cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Update flake lock
@@ -54,7 +65,7 @@ jobs:
         run: nix build .#nixosConfigurations.nixos.config.system.build.toplevel
 
       - name: Push Build Results to Cachix (zerokaze420)
-        # 'nix-store -qR result' 找到整个系统依赖树的闭包
+        # 找到整个系统依赖树的闭包并推送到您的缓存
         run: |
           nix-store -qR result | cachix push zerokaze420
 
@@ -62,3 +73,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore: update flake.lock"
+
