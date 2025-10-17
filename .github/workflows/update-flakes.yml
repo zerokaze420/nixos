@@ -11,6 +11,10 @@ jobs:
     
     permissions:
       contents: write 
+    
+    # ⭐ 核心修复：设置 NIX_CONFIG 环境变量，启用实验性功能
+    env:
+      NIX_CONFIG: "extra-experimental-features = nix-command flakes"
 
     steps:
       - name: Check out repository
