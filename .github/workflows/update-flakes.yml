@@ -28,7 +28,7 @@ jobs:
         run: nix flake update
 
       # 验证构建：使用您的主机名 'nixos' 确保更新后的依赖不会破坏构建
-      - name: Verify Build (Host: nixos)
+      - name: Verify Build 
         run: nix build .#nixosConfigurations.nixos.config.system.build.toplevel
 
       - name: Commit changes
