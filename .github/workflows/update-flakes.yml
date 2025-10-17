@@ -16,12 +16,12 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      - name: Install Nix and Setup Caching
-        uses: cachix/install-nix-action@v22
-        with:
-          # 不指定 nix_version，Action 将自动安装当时最新的稳定版 Nix
-          nix_path: nixpkgs=channel:nixos-unstable
-          cache-nix-paths: true
+      - name: Install Nix (Manual Script)
+        # 注意：使用安装脚本会失去 cachix/install-nix-action 提供的自动缓存和环境设置功能。
+        run: |
+          curl -L https://nixos.org/nix/install | sh
+          # 将 Nix profile 路径添加到 PATH 中，以供后续步骤使用
+          echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
 
       - name: Update flake lock
         run: nix flake update
