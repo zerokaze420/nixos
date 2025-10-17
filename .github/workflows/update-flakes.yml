@@ -12,7 +12,7 @@ jobs:
     permissions:
       contents: write 
     
-    # ⭐ 核心修复：设置 NIX_CONFIG 环境变量，启用实验性功能
+    # 设置 NIX_CONFIG 环境变量，启用实验性功能
     env:
       NIX_CONFIG: "extra-experimental-features = nix-command flakes"
 
@@ -21,18 +21,41 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Install Nix (Manual Script)
-        # 注意：使用安装脚本会失去 cachix/install-nix-action 提供的自动缓存和环境设置功能。
+        # 使用安装脚本以确保获取到最新的 Nix 版本
         run: |
           curl -L https://nixos.org/nix/install | sh
           # 将 Nix profile 路径添加到 PATH 中，以供后续步骤使用
           echo "$HOME/.nix-profile/bin" >> $GITHUB_PATH
+          # 重新加载环境，确保 'nix' 可用
+          . $HOME/.nix-profile/etc/profile.d/nix.sh
+
+      - name: Install and Configure Cachix
+        run: |
+          # 1. 安装 Cachix CLI 工具
+          nix-env -iA cachix -f https://cachix.org/api/v1/install
+          
+          # 2. 配置 NixOS 官方二进制缓存（用于拉取公共依赖）
+          echo "Setting up public NixOS Cache..."
+          cachix use nixos-cache
+          
+          # 3. 配置您的个人缓存 (zerokaze420)。这个步骤会自动设置您提供的公共密钥。
+          echo "Setting up personal cache (zerokaze420) for pushing/pulling..."
+          cachix use zerokaze420
+          
+          # 4. 认证：使用 GitHub Secrets 提供的令牌进行身份验证，以便推送到您的缓存
+          cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Update flake lock
         run: nix flake update
 
-      # 验证构建：使用您的主机名 'nixos' 确保更新后的依赖不会破坏构建
+      # 验证构建：使用您的主机名 'nixos'。
       - name: Verify Build 
         run: nix build .#nixosConfigurations.nixos.config.system.build.toplevel
+
+      - name: Push Build Results to Cachix (zerokaze420)
+        # 'nix-store -qR result' 找到整个系统依赖树的闭包
+        run: |
+          nix-store -qR result | cachix push zerokaze420
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v4
