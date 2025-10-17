@@ -34,15 +34,12 @@ jobs:
           # 1. 安装 Cachix CLI 工具
           nix-env -iA cachix -f https://cachix.org/api/v1/install
           
-          # 2. 配置 NixOS 官方二进制缓存（用于拉取公共依赖）
-          echo "Setting up public NixOS Cache..."
-          cachix use nixos-cache
-          
-          # 3. 配置您的个人缓存 (zerokaze420)。这个步骤会自动设置您提供的公共密钥。
+          # 2. 配置您的个人缓存 (zerokaze420)。这会自动设置拉取所需的公共密钥。
+          # 官方 NixOS 缓存（cache.nixos.org）通常会被 Nix 安装脚本自动配置。
           echo "Setting up personal cache (zerokaze420) for pushing/pulling..."
           cachix use zerokaze420
           
-          # 4. 认证：使用 GitHub Secrets 提供的令牌进行身份验证，以便推送到您的缓存
+          # 3. 认证：使用 GitHub Secrets 提供的令牌进行身份验证，以便推送到您的缓存
           cachix authtoken ${{ secrets.CACHIX_AUTH_TOKEN }}
 
       - name: Update flake lock
