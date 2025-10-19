@@ -30,7 +30,7 @@
     slurp
     wl-clipboard
     gemini-cli
-    chatbox
+    cherry-studio
       (feishu.override {
         commandLineArgs = [
           "--ozone-platform-hint=auto"
