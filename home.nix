@@ -22,7 +22,6 @@
     neovide
     firefox
     telegram-desktop
-    chatbox
     rustup
     youtube-music
     nodejs
@@ -31,6 +30,7 @@
     slurp
     wl-clipboard
     gemini-cli
+    chatbox
       (feishu.override {
         commandLineArgs = [
           "--ozone-platform-hint=auto"
