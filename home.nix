@@ -25,6 +25,8 @@
     chatbox
     rustup
     youtube-music
+    nodejs
+    bun
     grim
     slurp
     wl-clipboard
