@@ -11,9 +11,6 @@
     ./homeModules/vscode.nix
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
-
-
-
   ];
 
   # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.

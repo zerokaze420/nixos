@@ -32,8 +32,6 @@
         ./Modules/services/dae.nix
         ./Modules/user/tux.nix
         ./Modules/nh.nix
-
-
         {
           nixpkgs.overlays = [
             niri.overlays.niri 
