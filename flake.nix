@@ -27,7 +27,6 @@
     
     # 2. 定义所有主机的公共模块（Common Modules）
     commonModules = [
-      ./configuration.nix
       ./Modules/services/ssh.nix
       ./Modules/services/dae.nix
       ./Modules/user/tux.nix
@@ -58,15 +57,11 @@
       }
     ];
 
-    # 3. 读取主机配置目录
-    #    🚨 修复后的代码：使用内置函数 builtins.readDir
     hostConfigs = nixpkgs.lib.mapAttrs' (name: _: {
       name = name;
-      # 导入每个主机目录下的 configuration.nix 文件
       value = { modules = [ (./hosts + "/${name}/configuration.nix") ]; };
     }) (builtins.readDir ./hosts); # <-- 修复点
 
-    # 4. 动态生成 nixosConfigurations
     nixosConfigurations = nixpkgs.lib.mapAttrs (name: hostAttrs:
       nixpkgs.lib.nixosSystem {
         inherit system;
