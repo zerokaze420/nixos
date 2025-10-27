@@ -54,10 +54,7 @@
   ];
 
   environment.systemPackages = with pkgs; [
-    mpd
-    ncmpcpp
     dae
-    swww
     wget
     aria2
     neovim
@@ -65,7 +62,6 @@
     fastfetch
     copyq
     cliphist
-    fuzzel
     nodejs
     android-tools
     git
@@ -88,6 +84,7 @@
     GOOGLE_CLOUD_PROJECT = "740117566518";
     NIXOS_OZONE_WL = "1";
   };
+
   programs.fish.enable = true;
   virtualisation.libvirtd.enable = true;
   programs.virt-manager.enable = true;
