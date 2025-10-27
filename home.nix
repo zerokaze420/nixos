@@ -16,7 +16,6 @@
   # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.
   home.packages = with pkgs; [
     htop
-    neovide
     firefox
     telegram-desktop
     rustup
@@ -27,7 +26,6 @@
     slurp
     wl-clipboard
     gemini-cli
-    cherry-studio
       (feishu.override {
         commandLineArgs = [
           "--ozone-platform-hint=auto"
