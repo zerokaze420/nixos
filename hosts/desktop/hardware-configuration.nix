@@ -31,6 +31,11 @@
     fsType = "ext4";  
     };
 
+    systemd.tmpfiles.rules = [
+    # Type Path        Mode UID    GID      Age Argument
+    "d    /data       0755 tux  users    -   -" 
+  ];
+
   swapDevices = [ ];
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
