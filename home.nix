@@ -11,6 +11,7 @@
     ./homeModules/vscode.nix
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
+    inputs.zen-browser.homeModules.beta
   ];
 
   # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.
@@ -34,6 +35,7 @@
       })  
 	];
   programs.dankMaterialShell.enable = true;
+  programs.zen-browser.enable = true;
 
 
 
