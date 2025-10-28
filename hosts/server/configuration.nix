@@ -80,6 +80,9 @@
      wget
      fish
      git
+     fastfetch
+     tmux
+     btop
   ];
 
   # Some programs need SUID wrappers, can be configured further or are
