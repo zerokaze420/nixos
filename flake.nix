@@ -1,5 +1,5 @@
 {
-  description = "一个基础 Flake - 支持多主机";
+  description = "一个基础 Flake - 支持多主机和模块选择性加载";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -22,29 +22,34 @@
 
   outputs = { self, nixpkgs, home-manager, dankMaterialShell, niri, ... }@inputs:
   let
-    # 1. 定义系统架构
     system = "x86_64-linux";
     
-    # 2. 定义所有主机的公共模块（Common Modules）
-    commonModules = [
+    # --- 1. 定义真正的全局共享模块 (GLOBAL COMMON MODULES) ---
+    globalCommonModules = [
       ./Modules/services/ssh.nix
       ./Modules/services/dae.nix
-      ./Modules/user/tux.nix
       ./Modules/nh.nix
       
-      # Niri Overlay
+      # Niri Overlay (所有主机都可用的包定义，不包含激活)
       {
         nixpkgs.overlays = [
           niri.overlays.niri 
         ];
       }
+    ];
+
+    # --- 2. 定义桌面专有模块 (DESKTOP MODULES) ---
+    # 包含用户 'tux' 的定义、Home Manager 核心和配置。
+    desktopModules = [
+      ./Modules/user/tux.nix # 定义用户 'tux'
       
-      # Home Manager Setup for user 'tux' (Assumed to be common)
+      # Home Manager 核心设置
       home-manager.nixosModules.home-manager
       {
         home-manager = {
           useGlobalPkgs = true; 
           useUserPackages = true;
+          # 仅在桌面主机上配置 'tux' 用户的 home
           users.tux = { 
             imports = [
               ./home.nix 
@@ -57,24 +62,37 @@
       }
     ];
 
-    hostConfigs = nixpkgs.lib.mapAttrs' (name: _: {
+    # --- 3. 定义主机类型映射 ---
+    # !! 请根据您的实际主机名修改此映射 !!
+    hostTypes = {
+      # 示例：假设您原来的主机叫 'my-desktop'
+      "desktop" = "desktop"; 
+      "laptop" = "desktop";
+      
+      # 新的服务器
+      "server01" = "server"; 
+      
+      # 如果您有更多主机，请在这里添加
+    };
+
+
+    hostConfigs = nixpkgs.lib.mapAttrs' (name: type: {
       name = name;
-      value = { modules = [ (./hosts + "/${name}/configuration.nix") ]; };
-    }) (builtins.readDir ./hosts); # <-- 修复点
+      # 模块列表：
+      value.modules = globalCommonModules                             # 始终加载全局模块
+                      ++ (if type == "desktop" then desktopModules else [ ]) # 如果是桌面，加载桌面模块
+                      ++ [ (./hosts + "/${name}/configuration.nix") ]; # 加载主机特定配置
+    }) hostTypes;
 
     nixosConfigurations = nixpkgs.lib.mapAttrs (name: hostAttrs:
       nixpkgs.lib.nixosSystem {
         inherit system;
-        
-        # 模块 = 公共模块 + 主机特定的配置模块
-        modules = commonModules ++ hostAttrs.modules;
-        
+        modules = hostAttrs.modules;
         specialArgs = { inherit inputs niri; };
       }
     ) hostConfigs;
 
   in {
-    # 导出所有动态生成的主机配置
     inherit nixosConfigurations;
   };
 }
