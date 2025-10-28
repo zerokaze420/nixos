@@ -70,7 +70,7 @@
       "laptop" = "desktop";
       
       # 新的服务器
-      "server01" = "server"; 
+      "server" = "server"; 
       
       # 如果您有更多主机，请在这里添加
     };
