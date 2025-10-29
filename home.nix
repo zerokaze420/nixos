@@ -17,6 +17,8 @@
   # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.
   home.packages = with pkgs; [
     htop
+    devenv
+    qt6ct
     firefox
     telegram-desktop
     rustup
