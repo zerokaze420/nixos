@@ -83,7 +83,10 @@
     QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
   };
   programs.fish.enable = true;
-  virtualisation.libvirtd.enable = true;
+  virtualisation.libvirtd = {
+    enable = true;
+    allowedBridges = [ "virbr0" ]; 
+  };
   programs.virt-manager.enable = true;
   programs.niri = {
     enable = true;
@@ -94,6 +97,7 @@
   virtualisation.libvirtd.qemu = {
     swtpm.enable = true;
   };
+  users.groups.libvirtd.members = ["alice"];
 
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;

@@ -32,6 +32,13 @@ For example, to apply the configuration to my laptop, I would run:
 sudo nixos-rebuild switch --flake .#laptop
 ```
 
+To apply the configuration to my server, I would run:
+
+```bash
+sudo nixos-rebuild switch --flake .#server --impure
+```
+
+
 ## Tree
 
 ```
