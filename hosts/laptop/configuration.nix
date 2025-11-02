@@ -10,6 +10,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.niri.nixosModules.niri
+    ./../../Modules/fonts.nix
   ];
 
   boot.loader = {
@@ -44,18 +45,6 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
-  fonts.packages = with pkgs; [
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
-    proggyfonts
-    font-awesome
-  ];
 
   environment.systemPackages = with pkgs; [
     dae

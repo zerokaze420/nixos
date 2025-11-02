@@ -23,6 +23,7 @@
     rustup
     alacritty
     youtube-music
+    qq
     nodejs
     wpsoffice
     bun
