@@ -1,33 +1,36 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
-  imports =
-    [ 
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    ./hardware-configuration.nix
+  ];
 
   boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda"; 
+  boot.loader.grub.device = "/dev/vda";
 
-  networking.hostName = "nixos"; 
-  networking.networkmanager.enable = true;  
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
 
   time.timeZone = "Asia/Shanghai";
 
-   environment.systemPackages = with pkgs; [
-     vim 
-     wget
-     fish
-     git
-     fastfetch
-     tmux
-     btop
+  environment.systemPackages = with pkgs; [
+    vim
+    wget
+    fish
+    git
+    fastfetch
+    tmux
+    btop
   ];
 
-   services.openssh.enable = true;
-   services.openssh.settings.PermitRootLogin = "yes";
+  services.openssh.enable = true;
+  services.openssh.settings.PermitRootLogin = "yes";
 
-  system.stateVersion = "25.05"; 
+  system.stateVersion = "25.05";
 
 }
-

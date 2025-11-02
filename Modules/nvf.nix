@@ -2,7 +2,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   programs.nvf = {
     enable = true;
     # your settings need to go into the settings attribute set
@@ -47,7 +48,7 @@
         # This section does not include a comprehensive list of available language modules.
         # To list all available language module options, please visit the nvf manual.
         languages = {
-          enableFormat = true; #
+          enableFormat = true;
           enableTreesitter = true;
           enableExtraDiagnostics = true;
 
@@ -239,7 +240,10 @@
               nix = "110";
               ruby = "120";
               java = "130";
-              go = ["90" "130"];
+              go = [
+                "90"
+                "130"
+              ];
             };
           };
           fastaction.enable = true;

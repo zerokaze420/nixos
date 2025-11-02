@@ -1,5 +1,4 @@
-
-{ inputs, pkgs, ... }: 
+{ inputs, pkgs, ... }:
 
 {
   home.username = "tux";
@@ -33,17 +32,15 @@
     wl-clipboard
     wechat
     gemini-cli
-      (feishu.override {
-        commandLineArgs = [
-          "--ozone-platform-hint=auto"
-          "--ozone-platform=wayland"
-        ];
-      })  
-	];
+    (feishu.override {
+      commandLineArgs = [
+        "--ozone-platform-hint=auto"
+        "--ozone-platform=wayland"
+      ];
+    })
+  ];
   programs.dankMaterialShell.enable = true;
   programs.zen-browser.enable = true;
-
-
 
   home.stateVersion = "23.11";
 }

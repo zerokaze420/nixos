@@ -1,7 +1,7 @@
-{config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   # starship 是一个跨平台的 shell 提示符
-    programs.starship = {
+  programs.starship = {
     enable = true;
     # 自定义配置
     settings = {
