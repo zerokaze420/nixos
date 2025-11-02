@@ -18,16 +18,20 @@
   home.packages = with pkgs; [
     htop
     devenv
-    qt6ct
+    qt6Packages.qt6ct
     firefox
     telegram-desktop
     rustup
+    alacritty
     youtube-music
     nodejs
+    wpsoffice
     bun
     grim
+    remmina
     slurp
     wl-clipboard
+    wechat
     gemini-cli
       (feishu.override {
         commandLineArgs = [

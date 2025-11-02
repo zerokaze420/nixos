@@ -5,7 +5,7 @@
 		ports = [ 22 ];
 		settings = {
 			PasswordAuthentication = true;
-			AllowUsers = [ "Zerokaze"  "root"];
+			AllowUsers = [ "Zerokaze"  "root" "tux"];
 			UseDns = true;
 			X11Forwarding = false;
 			PermitRootLogin = "yes";
