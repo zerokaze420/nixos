@@ -18,6 +18,7 @@
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages_zen;
+  niri-flake.cache.enable = true;
   services.thermald.enable = true;
   services.tlp = {
     enable = true;
@@ -60,10 +61,7 @@
     fuzzel
     nodejs
     android-tools
-    git
     btop
-    waybar
-    dunst
     qemu
     libvirt
     virt-manager
@@ -81,6 +79,7 @@
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
+    NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = "1";
   };
   programs.fish.enable = true;
   virtualisation.libvirtd = {
@@ -90,8 +89,8 @@
   programs.virt-manager.enable = true;
   programs.niri = {
     enable = true;
-    package = inputs.niri.packages.${pkgs.system}.niri-unstable;
   };
+
 
   # Enable TPM emulation (optional)
   virtualisation.libvirtd.qemu = {
@@ -101,7 +100,16 @@
 
   # Enable USB redirection (optional)
   virtualisation.spiceUSBRedirection.enable = true;
-  i18n.inputMethod.fcitx5.waylandFrontend = true;
+  #i18n.inputMethod.fcitx5.waylandFrontend = true;
+  i18n.inputMethod = {
+     type = "fcitx5";
+     enable = true;
+     fcitx5.addons = with pkgs; [
+       fcitx5-gtk             # alternatively, kdePackages.fcitx5-qt
+       qt6Packages.fcitx5-chinese-addons
+       fcitx5-nord            # a color theme
+     ];
+   };
   programs.nix-ld.enable = true;
 
   networking.hostName = "nixos"; # Define your hostname.
