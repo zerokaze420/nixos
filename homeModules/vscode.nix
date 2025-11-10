@@ -7,6 +7,7 @@
       dracula-theme.theme-dracula
       vscodevim.vim
       yzhang.markdown-all-in-one
+      jnoortheen.nix-ide
     ];
   };
 }

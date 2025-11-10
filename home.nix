@@ -11,17 +11,16 @@
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
     ./homeModules/desktop/helix.nix
+    ./homeModules/desktop/fonts.nix
     inputs.zen-browser.homeModules.beta
   ];
 
-  # The 'pkgs' here includes 'niri-unstable' thanks to the global overlay.
   home.packages = with pkgs; [
     htop
     devenv
     qt6Packages.qt6ct
     firefox
     telegram-desktop
-    # 1. ADD RUST-ANALYZER HERE
     rust-analyzer
     google-chrome
     alacritty
@@ -44,7 +43,6 @@
     })
   ];
 
-  # 2. Add Cargo configuration to ensure rust-src component is available (Crucial for NixOS)
 
   programs.dankMaterialShell.enable = true;
   programs.zen-browser.enable = true;
