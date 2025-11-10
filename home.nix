@@ -11,7 +11,6 @@
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
     ./homeModules/desktop/helix.nix
-    ./homeModules/desktop/fonts.nix
     inputs.zen-browser.homeModules.beta
   ];
 

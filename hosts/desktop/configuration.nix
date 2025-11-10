@@ -10,7 +10,12 @@
   imports = [
     ./hardware-configuration.nix
     inputs.niri.nixosModules.niri
+    ./../../Modules/desktop/fonts.nix
     ./../../Modules/environment.nix
+    ./../../Modules/services/tlp.nix
+    ./../../Modules/services/virt.nix
+    ./../../Modules/services/pipewire.nix
+    ./../../Modules/desktop/defaults.nix
   ];
 
   boot.loader = {
@@ -20,24 +25,6 @@
   boot.kernelPackages = pkgs.linuxPackages_zen;
   niri-flake.cache.enable = true;
   services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
-
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 20;
-
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-  };
   services.xserver.xkb.layout = "us";
   services.xserver.enable = true;
   nix.settings.experimental-features = [
@@ -46,51 +33,13 @@
   ];
   nixpkgs.config.allowUnfree = true;
 
-  environment.systemPackages = with pkgs; [
-    mpd
-    ncmpcpp
-    dae
-    swww
-    wget
-    aria2
-    neovim
-    usbutils
-    fastfetch
-    copyq
-    cliphist
-    fuzzel
-    nodejs
-    android-tools
-    btop
-    qemu
-    libvirt
-    virt-manager
-    tmux
-    starship
-    bun
-    direnv
-  ];
   qt.enable = true;
 
   programs.fish.enable = true;
-  virtualisation.libvirtd = {
-    enable = true;
-    allowedBridges = [ "virbr0" ]; 
-  };
-  programs.virt-manager.enable = true;
   programs.niri = {
     enable = true;
   };
 
-
-  # Enable TPM emulation (optional)
-  virtualisation.libvirtd.qemu = {
-    swtpm.enable = true;
-  };
-  users.groups.libvirtd.members = ["alice"];
-
-  # Enable USB redirection (optional)
-  virtualisation.spiceUSBRedirection.enable = true;
   #i18n.inputMethod.fcitx5.waylandFrontend = true;
   i18n.inputMethod = {
      type = "fcitx5";
@@ -107,15 +56,6 @@
   networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
   time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_US.UTF-8";
-
-  security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
 
   nix.settings.auto-optimise-store = true;
 
