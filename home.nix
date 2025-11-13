@@ -25,6 +25,7 @@
     alacritty
     helix
     youtube-music
+    podman
     qq
     nodejs
     wpsoffice
@@ -42,10 +43,8 @@
     })
   ];
 
-
   programs.dankMaterialShell.enable = true;
   programs.zen-browser.enable = true;
-
 
   home.stateVersion = "23.11";
 }
