@@ -18,14 +18,18 @@
     htop
     devenv
     qt6Packages.qt6ct
+    yazi
     firefox
     telegram-desktop
     rust-analyzer
     google-chrome
     alacritty
+    openssl
     helix
     youtube-music
     podman
+    cargo
+    qcm
     qq
     nodejs
     wpsoffice
