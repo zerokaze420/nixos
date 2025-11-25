@@ -29,8 +29,8 @@
     youtube-music
     podman
     cargo
-    qcm
     qq
+    splayer
     nodejs
     wpsoffice
     bun
