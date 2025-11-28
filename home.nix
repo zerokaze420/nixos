@@ -18,6 +18,7 @@
     htop
     devenv
     qt6Packages.qt6ct
+    docker
     yazi
     firefox
     telegram-desktop
@@ -28,6 +29,7 @@
     helix
     youtube-music
     podman
+    gnumake
     cargo
     qq
     splayer

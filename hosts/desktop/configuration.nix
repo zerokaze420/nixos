@@ -16,6 +16,7 @@
     ./../../Modules/services/virt.nix
     ./../../Modules/services/pipewire.nix
     ./../../Modules/desktop/defaults.nix
+    ./../../Modules/services/docker.nix
   ];
 
   boot.loader = {
