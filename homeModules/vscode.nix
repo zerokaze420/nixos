@@ -9,6 +9,7 @@
       yzhang.markdown-all-in-one
       jnoortheen.nix-ide
       rust-lang.rust-analyzer
+      ms-azuretools.vscode-docker
     ];
   };
 }
