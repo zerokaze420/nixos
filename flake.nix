@@ -1,5 +1,5 @@
 {
-  description = "一个基础 Flake - 支持多主机和模块选择性加载";
+  description = "NixOS Flake - KDE Plasma + DankGreeter";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -14,8 +14,9 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    dankMaterialShell = {
-      url = "github:AvengeMedia/DankMaterialShell";
+    # DankMaterialShell (stable) — provides greeter + home-manager modules
+    dms = {
+      url = "github:AvengeMedia/DankMaterialShell/stable";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -23,89 +24,95 @@
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    hyprland = {
+      url = "github:hyprwm/Hyprland";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    # DMS dependency: system resource monitor
+    dgop = {
+      url = "github:AvengeMedia/dgop";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      dankMaterialShell,
-      niri,
-      ...
+    { self
+    , nixpkgs
+    , home-manager
+    , dms
+    , niri
+    , hyprland
+    , dgop
+    , ...
     }@inputs:
     let
       system = "x86_64-linux";
 
-      # --- 1. 定义真正的全局共享模块 (GLOBAL COMMON MODULES) ---
+      # ── Global modules (all hosts) ──
       globalCommonModules = [
         ./Modules/services/ssh.nix
         ./Modules/services/dae.nix
         ./Modules/nh.nix
-
-        # Niri Overlay (所有主机都可用的包定义，不包含激活)
         {
           nixpkgs.overlays = [
             niri.overlays.niri
+            hyprland.overlays.default
+            (final: prev: {
+              dgop = dgop.packages.${system}.dgop;
+            })
           ];
         }
       ];
 
-      # --- 2. 定义桌面专有模块 (DESKTOP MODULES) ---
-      # 包含用户 'tux' 的定义、Home Manager 核心和配置。
+      # ── Desktop modules (KDE + Hyprland/Niri + DankGreeter + Home Manager) ──
       desktopModules = [
-        ./Modules/user/tux.nix # 定义用户 'tux'
+        ./Modules/user/tux.nix
 
-        # Home Manager 核心设置
+        # Hyprland + Niri compositors
+        hyprland.nixosModules.default
+        niri.nixosModules.niri
+
+        # DankGreeter — greetd-based login screen
+        dms.nixosModules.greeter
+
+        # Home Manager
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            # 仅在桌面主机上配置 'tux' 用户的 home
             users.tux = {
-              imports = [
-                ./home.nix
-                inputs.dankMaterialShell.homeModules.dankMaterialShell.default
-                inputs.dankMaterialShell.homeModules.dankMaterialShell.niri
-              ];
+              imports = [ ./home.nix ];
             };
             extraSpecialArgs = { inherit inputs; };
           };
         }
       ];
 
-      # --- 3. 定义主机类型映射 ---
-      # !! 请根据您的实际主机名修改此映射 !!
-      hostTypes = {
-        # 示例：假设您原来的主机叫 'my-desktop'
-        "desktop" = "desktop";
-        "laptop" = "desktop";
-
-        # 新的服务器
-        "server" = "server";
-
-        # 如果您有更多主机，请在这里添加
+      # ── Host definitions ──
+      # Each entry: { type = "desktop"|"server"; dir = "config-subdirectory"; }
+      hostDefs = {
+        "nixos" =   { type = "desktop"; dir = "desktop"; };  # AMD Ryzen 5600X + Intel Arc
+        "desktop" = { type = "desktop"; dir = "desktop"; };
+        "laptop" =  { type = "desktop"; dir = "laptop"; };
+        "server" =  { type = "server";  dir = "server"; };
       };
 
-      hostConfigs = nixpkgs.lib.mapAttrs' (name: type: {
-        name = name;
-        # 模块列表：
-        value.modules =
-          globalCommonModules # 始终加载全局模块
-          ++ (if type == "desktop" then desktopModules else [ ]) # 如果是桌面，加载桌面模块
-          ++ [ (./hosts + "/${name}/configuration.nix") ]; # 加载主机特定配置
-      }) hostTypes;
+      mkModules = def:
+        globalCommonModules
+        ++ (if def.type == "desktop" then desktopModules else [ ])
+        ++ [ (./hosts + "/${def.dir}/configuration.nix") ];
 
       nixosConfigurations = nixpkgs.lib.mapAttrs (
-        name: hostAttrs:
+        name: def:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          modules = hostAttrs.modules;
-          specialArgs = { inherit inputs niri; };
+          modules = mkModules def;
+          specialArgs = { inherit inputs niri hyprland; };
         }
-      ) hostConfigs;
-
+      ) hostDefs;
     in
     {
       inherit nixosConfigurations;

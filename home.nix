@@ -12,6 +12,8 @@
     ./homeModules/desktop/kitty.nix
     ./homeModules/desktop/helix.nix
     inputs.zen-browser.homeModules.beta
+    inputs.dms.homeModules.dank-material-shell
+    inputs.dms.homeModules.niri
   ];
 
   home.packages = with pkgs; [

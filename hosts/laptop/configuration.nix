@@ -1,16 +1,12 @@
-{
-  config,
-  lib,
-  pkgs,
-  inputs,
-  niri,
-  ...
-}:
+{ config, lib, pkgs, inputs, niri, hyprland, ... }:
 {
   imports = [
     ./hardware-configuration.nix
-    inputs.niri.nixosModules.niri
-    ./../../Modules/fonts.nix
+    ./../../Modules/desktop/fonts.nix
+    ./../../Modules/environment.nix
+    ./../../Modules/services/pipewire.nix
+    ./../../Modules/services/tlp.nix
+    ./../../Modules/services/virt.nix
   ];
 
   boot.loader = {
@@ -18,100 +14,49 @@
     efi.canTouchEfiVariables = true;
   };
   boot.kernelPackages = pkgs.linuxPackages_zen;
-  services.thermald.enable = true;
-  services.tlp = {
-    enable = true;
-    settings = {
-      CPU_SCALING_GOVERNOR_ON_AC = "performance";
-      CPU_SCALING_GOVERNOR_ON_BAT = "powersave";
 
-      CPU_ENERGY_PERF_POLICY_ON_BAT = "power";
-      CPU_ENERGY_PERF_POLICY_ON_AC = "performance";
-
-      CPU_MIN_PERF_ON_AC = 0;
-      CPU_MAX_PERF_ON_AC = 100;
-      CPU_MIN_PERF_ON_BAT = 0;
-      CPU_MAX_PERF_ON_BAT = 20;
-
-      START_CHARGE_THRESH_BAT0 = 40;
-      STOP_CHARGE_THRESH_BAT0 = 80;
-    };
-  };
-  services.xserver.xkb.layout = "us";
-  services.xserver.enable = true;
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-  nixpkgs.config.allowUnfree = true;
-
-
-  environment.systemPackages = with pkgs; [
-    dae
-    wget
-    aria2
-    neovim
-    usbutils
-    fastfetch
-    copyq
-    cliphist
-    nodejs
-    android-tools
-    git
-    btop
-    waybar
-    dunst
-    qemu
-    libvirt
-    virt-manager
-    tmux
-    starship
-    bun
-    direnv
-  ];
-  qt.enable = true;
-
-  environment.sessionVariables = {
-    QT_SCALE_FACTOR = "1.5";
-    QT_QPA_PLATFORM = "wayland";
-    GOOGLE_CLOUD_PROJECT = "740117566518";
-    NIXOS_OZONE_WL = "1";
-  };
-
-  programs.fish.enable = true;
-  virtualisation.libvirtd.enable = true;
-  programs.virt-manager.enable = true;
+  # ── Compositors ──
+  programs.hyprland.enable = true;
   programs.niri = {
     enable = true;
     package = inputs.niri.packages.${pkgs.system}.niri-unstable;
+  };
+  niri-flake.cache.enable = true;
 
+  # ── KDE Plasma 6 ──
+  services.desktopManager.plasma6.enable = true;
+  # services.displayManager.sddm.enable = true;
+
+  # ── DankGreeter ──
+  programs.dank-material-shell.greeter = {
+    enable = true;
+    compositor.name = "niri";
   };
 
-  # Enable TPM emulation (optional)
-  virtualisation.libvirtd.qemu = {
-    swtpm.enable = true;
-  };
+  services.xserver.enable = true;
+  services.xserver.xkb.layout = "us";
+  services.thermald.enable = true;
 
-  # Enable USB redirection (optional)
-  virtualisation.spiceUSBRedirection.enable = true;
-  i18n.inputMethod.fcitx5.waylandFrontend = true;
+  qt.enable = true;
+  programs.fish.enable = true;
   programs.nix-ld.enable = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
-  networking.networkmanager.enable = true; # Easiest to use and most distros use this by default.
+  i18n.inputMethod.fcitx5.waylandFrontend = true;
+
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
   time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_US.UTF-8";
 
-  security.rtkit.enable = true; # Enable RealtimeKit for audio purposes
-
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
+  nixpkgs.config.allowUnfree = true;
 
-  system.stateVersion = "24.11"; # Did you read the comment?
+  environment.systemPackages = with pkgs; [
+    waybar
+    dunst
+    git
+  ];
+
+  system.stateVersion = "24.11";
 }
