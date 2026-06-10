@@ -7,6 +7,7 @@
     swww
     wget
     aria2
+    wechat
     neovim
     usbutils
     fastfetch
