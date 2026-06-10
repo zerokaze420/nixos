@@ -18,6 +18,10 @@ hl.monitor({
 --------------------
 hl.env("XCURSOR_SIZE", "24")
 hl.env("HYPRCURSOR_SIZE", "24")
+hl.env("GTK_IM_MODULE", "fcitx")
+hl.env("QT_IM_MODULE", "fcitx")
+hl.env("XMODIFIERS", "@im=fcitx")
+hl.env("SDL_IM_MODULE", "fcitx")
 
 local terminal    = "kitty"
 local fileManager = "dolphin"
@@ -75,13 +79,6 @@ hl.config({
     touchpad = {
       natural_scroll = false,
     },
-  },
-
-  env = {
-    GTK_IM_MODULE = "fcitx",
-    QT_IM_MODULE = "fcitx",
-    XMODIFIERS = "@im=fcitx",
-    SDL_IM_MODULE = "fcitx",
   },
 
   misc = {
