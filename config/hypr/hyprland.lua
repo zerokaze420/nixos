@@ -138,9 +138,9 @@ hl.gesture({
 --------------------
 local mod = "SUPER"
 
-hl.exec_once("dms run")
-hl.exec_once("fcitx5 -d")
--- hl.exec_once("bash -c 'wl-paste --watch cliphist store &'")
+hl.exec("dms run")
+hl.exec("fcitx5 -d")
+-- hl.exec("bash -c 'wl-paste --watch cliphist store &'")
 
 hl.bind(mod .. " + Q",             hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + C",             hl.dsp.window.close())
