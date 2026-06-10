@@ -20,6 +20,7 @@
     tmux
     starship
     clash-verge-rev
+    opencode
     bun
     direnv
   ];
