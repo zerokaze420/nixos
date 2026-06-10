@@ -1,5 +1,5 @@
 {
-  description = "NixOS Flake - KDE Plasma + DankGreeter";
+  description = "NixOS Flake - Wayland + DMS (DankMaterialShell)";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";

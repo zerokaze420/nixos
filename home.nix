@@ -40,7 +40,10 @@
     gemini-cli
   ];
 
-  programs.dankMaterialShell.enable = true;
+  programs.dank-material-shell = {
+    enable = true;
+    dgop.package = inputs.dgop.packages.${pkgs.system}.dgop;
+  };
 
   home.stateVersion = "23.11";
 }

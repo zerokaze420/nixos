@@ -29,30 +29,28 @@
   programs.niri.enable = true;
   niri-flake.cache.enable = true;
 
-  # ── KDE Plasma 6 Desktop ──
-  services.desktopManager.plasma6.enable = true;
-  # SDDM is replaced by DankGreeter below
-  # services.displayManager.sddm.enable = true;
-
-  # ── DankGreeter (greetd-based login) ──
+  # ── DankGreeter (greetd-based Wayland greeter) ──
   programs.dank-material-shell.greeter = {
     enable = true;
     compositor.name = "niri";
   };
 
   # ── Base system ──
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "us";
+  console.keyMap = "us";
   services.thermald.enable = true;
 
   qt.enable = true;
   programs.fish.enable = true;
   programs.nix-ld.enable = true;
 
+  # ── Locale ──
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
+
   # ── Input method ──
   i18n.inputMethod = {
     type = "fcitx5";
     enable = true;
+    fcitx5.waylandFrontend = true;
     fcitx5.addons = with pkgs; [
       fcitx5-gtk
       qt6Packages.fcitx5-chinese-addons
@@ -64,7 +62,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # ── Locale ──
+  # ── Time ──
   time.timeZone = "Asia/Shanghai";
   i18n.defaultLocale = "en_US.UTF-8";
 

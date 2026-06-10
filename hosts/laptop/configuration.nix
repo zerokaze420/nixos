@@ -23,18 +23,13 @@
   };
   niri-flake.cache.enable = true;
 
-  # ── KDE Plasma 6 ──
-  services.desktopManager.plasma6.enable = true;
-  # services.displayManager.sddm.enable = true;
-
-  # ── DankGreeter ──
+  # ── DankGreeter (greetd-based Wayland greeter) ──
   programs.dank-material-shell.greeter = {
     enable = true;
     compositor.name = "niri";
   };
 
-  services.xserver.enable = true;
-  services.xserver.xkb.layout = "us";
+  console.keyMap = "us";
   services.thermald.enable = true;
 
   qt.enable = true;
@@ -42,6 +37,7 @@
   programs.nix-ld.enable = true;
 
   i18n.inputMethod.fcitx5.waylandFrontend = true;
+  i18n.supportedLocales = [ "en_US.UTF-8/UTF-8" "zh_CN.UTF-8/UTF-8" ];
 
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
