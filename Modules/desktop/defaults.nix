@@ -19,7 +19,7 @@
     btop
     tmux
     starship
-    opencode
+    clash-verge-rev
     bun
     direnv
   ];
