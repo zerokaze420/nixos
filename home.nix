@@ -11,7 +11,6 @@
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
     ./homeModules/desktop/helix.nix
-    inputs.zen-browser.homeModules.beta
     inputs.dms.homeModules.dank-material-shell
     inputs.dms.homeModules.niri
   ];
@@ -23,36 +22,25 @@
     docker
     yazi
     firefox
-    telegram-desktop
     rust-analyzer
-    google-chrome
     alacritty
     openssl
     helix
-    youtube-music
+    pear-desktop
     podman
     gnumake
     cargo
-    qq
     splayer
     nodejs
-    wpsoffice
     bun
     grim
     remmina
     slurp
     wl-clipboard
     gemini-cli
-    (feishu.override {
-      commandLineArgs = [
-        "--ozone-platform-hint=auto"
-        "--ozone-platform=wayland"
-      ];
-    })
   ];
 
   programs.dankMaterialShell.enable = true;
-  programs.zen-browser.enable = true;
 
   home.stateVersion = "23.11";
 }

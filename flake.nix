@@ -85,6 +85,9 @@
             useUserPackages = true;
             users.tux = {
               imports = [ ./home.nix ];
+              programs.niri.settings = {
+                layout.border.enable = false;
+              };
             };
             extraSpecialArgs = { inherit inputs; };
           };

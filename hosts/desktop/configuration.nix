@@ -26,10 +26,7 @@
 
   # ── Compositors: Hyprland + Niri ──
   programs.hyprland.enable = true;
-  programs.niri = {
-    enable = true;
-    settings.layout.border.enable = false;
-  };
+  programs.niri.enable = true;
   niri-flake.cache.enable = true;
 
   # ── KDE Plasma 6 Desktop ──
