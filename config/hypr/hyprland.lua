@@ -138,9 +138,11 @@ hl.gesture({
 --------------------
 local mod = "SUPER"
 
-hl.exec("dms run")
-hl.exec("fcitx5 -d")
--- hl.exec("bash -c 'wl-paste --watch cliphist store &'")
+hl.on("hyprland.start", function()
+  hl.exec_cmd("dms run")
+  hl.exec_cmd("fcitx5 -d")
+  -- hl.exec_cmd("wl-paste --watch cliphist store")
+end)
 
 hl.bind(mod .. " + Q",             hl.dsp.exec_cmd(terminal))
 hl.bind(mod .. " + C",             hl.dsp.window.close())
