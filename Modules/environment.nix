@@ -8,5 +8,9 @@
     QT_QPA_PLATFORMTHEME = "qt6ct";
     QT_QPA_PLATFORMTHEME_QT6 = "qt6ct";
     NIXPKGS_ACCEPT_ANDROID_SDK_LICENSE = "1";
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
   };
 }

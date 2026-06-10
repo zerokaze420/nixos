@@ -11,8 +11,9 @@
     ./homeModules/shell/starship.nix
     ./homeModules/desktop/kitty.nix
     ./homeModules/desktop/helix.nix
-    inputs.dms.homeModules.dank-material-shell
-    inputs.dms.homeModules.niri
+    ./homeModules/desktop/hyprland.nix
+    ./homeModules/desktop/niri.nix
+    ./homeModules/desktop/plasma.nix
   ];
 
   home.packages = with pkgs; [
@@ -39,11 +40,6 @@
     wl-clipboard
     gemini-cli
   ];
-
-  programs.dank-material-shell = {
-    enable = true;
-    dgop.package = inputs.dgop.packages.${pkgs.system}.dgop;
-  };
 
   home.stateVersion = "23.11";
 }

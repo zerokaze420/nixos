@@ -1,5 +1,5 @@
 {
-  description = "NixOS Flake - Wayland + DMS (DankMaterialShell)";
+  description = "NixOS Flake - KDE Plasma 6 + Hyprland";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -9,31 +9,20 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    # DankMaterialShell (stable) — provides greeter + home-manager modules
-    dms = {
-      url = "github:AvengeMedia/DankMaterialShell/stable";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    niri = {
-      url = "github:sodiboo/niri-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    # DMS dependency: system resource monitor
-    dgop = {
-      url = "github:AvengeMedia/dgop";
+    zen-browser = {
+      url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    plasma-manager = {
+      url = "git+https://github.com/nix-community/plasma-manager.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.home-manager.follows = "home-manager";
     };
   };
 
@@ -41,70 +30,65 @@
     { self
     , nixpkgs
     , home-manager
-    , dms
-    , niri
     , hyprland
-    , dgop
+    , plasma-manager
     , ...
     }@inputs:
     let
       system = "x86_64-linux";
 
-      # ── Global modules (all hosts) ──
-      globalCommonModules = [
+      globalModules = [
         ./Modules/services/ssh.nix
         ./Modules/services/dae.nix
         ./Modules/nh.nix
         {
           nixpkgs.overlays = [
-            niri.overlays.niri
             hyprland.overlays.default
-            (final: prev: {
-              dgop = dgop.packages.${system}.dgop;
-            })
           ];
         }
       ];
 
-      # ── Desktop modules (KDE + Hyprland/Niri + DankGreeter + Home Manager) ──
       desktopModules = [
         ./Modules/user/tux.nix
-
-        # Hyprland + Niri compositors
+        ./Modules/desktop/i18n.nix
+        ./Modules/environment.nix
         hyprland.nixosModules.default
-        niri.nixosModules.niri
 
-        # DankGreeter — greetd-based login screen
-        dms.nixosModules.greeter
+        {
+          programs.dms-shell = {
+            enable = true;
+            systemd.enable = true;
+            enableDynamicTheming = true;
+            enableSystemMonitoring = true;
+            enableClipboardPaste = true;
+          };
+        }
 
-        # Home Manager
         home-manager.nixosModules.home-manager
         {
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            users.tux = {
-              imports = [ ./home.nix ];
-              programs.niri.settings = {
-                layout.border.enable = false;
-              };
+            sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+            users.tux.imports = [ ./home.nix ];
+            extraSpecialArgs = {
+              inherit inputs;
+              hyprlandConf = ./config/hypr/hyprland.lua;
+              niriConf = ./config/niri/config.kdl;
             };
-            extraSpecialArgs = { inherit inputs; };
           };
         }
       ];
 
-      # ── Host definitions ──
-      # Each entry: { type = "desktop"|"server"; dir = "config-subdirectory"; }
       hostDefs = {
-        "nixos" =   { type = "desktop"; dir = "desktop"; };  # AMD Ryzen 5600X + Intel Arc
+        "nixos"   = { type = "desktop"; dir = "desktop"; };
         "desktop" = { type = "desktop"; dir = "desktop"; };
-        "laptop" =  { type = "desktop"; dir = "laptop"; };
-        "server" =  { type = "server";  dir = "server"; };
+        "laptop"  = { type = "desktop"; dir = "laptop"; };
+        "server"  = { type = "server";  dir = "server"; };
       };
 
       mkModules = def:
-        globalCommonModules
+        globalModules
         ++ (if def.type == "desktop" then desktopModules else [ ])
         ++ [ (./hosts + "/${def.dir}/configuration.nix") ];
 
@@ -113,7 +97,7 @@
         nixpkgs.lib.nixosSystem {
           inherit system;
           modules = mkModules def;
-          specialArgs = { inherit inputs niri hyprland; };
+          specialArgs = { inherit inputs hyprland; };
         }
       ) hostDefs;
     in

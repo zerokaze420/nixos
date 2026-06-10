@@ -4,7 +4,7 @@
     mpd
     ncmpcpp
     dae
-    swww
+    awww
     wget
     aria2
     wechat
