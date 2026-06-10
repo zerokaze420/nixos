@@ -99,6 +99,16 @@ binds {
         spawn "dms" "ipc" "call" "lock" "lock"
     }
 
+    // Process list (DMS)
+    Mod+M hotkey-overlay-title="Process List" {
+        spawn "dms" "ipc" "call" "processlist" "focusOrToggle"
+    }
+
+    // Wallpaper (DMS)
+    Mod+Y hotkey-overlay-title="Wallpaper" {
+        spawn "dms" "ipc" "call" "dankdash" "wallpaper"
+    }
+
     // Close window
     Mod+C hotkey-overlay-title="Close Window" {
         close-window
