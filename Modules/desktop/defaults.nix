@@ -19,6 +19,7 @@
     btop
     tmux
     starship
+    opencode
     bun
     direnv
   ];
