@@ -53,7 +53,7 @@
         {
           programs.dms-shell = {
             enable = true;
-            systemd.enable = true;
+            systemd.enable = false;
             enableDynamicTheming = true;
             enableSystemMonitoring = true;
             enableClipboardPaste = true;
