@@ -176,7 +176,6 @@ binds {
     }
 }
 
-// Spawn at startup
-spawn-at-startup "dms" "run"
+// Spawn at startup (DMS is managed by systemd, so no dms run here)
 spawn-at-startup "fcitx5" "-d"
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
