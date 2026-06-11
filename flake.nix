@@ -69,7 +69,7 @@
             users.tux.imports = [ ./home.nix ];
             extraSpecialArgs = {
               inherit inputs;
-              hyprlandConf = ./config/hypr/hyprland.lua;
+              hyprlandConf = ./config/hypr/hyprland.conf;
               niriConf = ./config/niri/config.kdl;
             };
           };

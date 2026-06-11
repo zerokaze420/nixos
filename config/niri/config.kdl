@@ -120,10 +120,10 @@ binds {
     }
 
     // Focus
-    Mod+Left  hotkey-overlay-title="Focus Left"  { focus-column-left }
-    Mod+Right hotkey-overlay-title="Focus Right" { focus-column-right }
-    Mod+Up    hotkey-overlay-title="Focus Up"    { focus-workspace-up }
-    Mod+Down  hotkey-overlay-title="Focus Down"  { focus-workspace-down }
+    Mod+Left  hotkey-overlay-title="Focus Left"  { focus-column-left; }
+    Mod+Right hotkey-overlay-title="Focus Right" { focus-column-right; }
+    Mod+Up    hotkey-overlay-title="Focus Up"    { focus-workspace-up; }
+    Mod+Down  hotkey-overlay-title="Focus Down"  { focus-workspace-down; }
 
     // Move windows
     Mod+Shift+Left  { move-column-left }
