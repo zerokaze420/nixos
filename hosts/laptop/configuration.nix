@@ -34,7 +34,7 @@
   programs.fish.enable = true;
   programs.nix-ld.enable = true;
 
-  networking.hostName = "nixos";
+  networking.hostName = "laptop";
   networking.networkmanager.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];

@@ -39,7 +39,6 @@
 
       globalModules = [
         ./Modules/services/ssh.nix
-        ./Modules/services/dae.nix
         ./Modules/nh.nix
         {
           nixpkgs.overlays = [
@@ -52,6 +51,7 @@
         ./Modules/user/tux.nix
         ./Modules/desktop/i18n.nix
         ./Modules/environment.nix
+        ./Modules/services/dae.nix
         hyprland.nixosModules.default
 
         {
