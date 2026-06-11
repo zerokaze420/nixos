@@ -16,10 +16,14 @@ environment {
 
 // Input
 input {
-    kb_layout "us"
-    xkb_numlock "on"
-    focus-follows-mouse "none"
-    warp-mouse-to-focus false
+    keyboard {
+        xkb {
+            layout "us"
+        }
+    }
+    touchpad {
+        tap
+    }
 }
 
 // Layout
