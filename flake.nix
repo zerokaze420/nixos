@@ -14,11 +14,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    zen-browser = {
-      url = "github:0xc000022070/zen-browser-flake";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     plasma-manager = {
       url = "git+https://github.com/nix-community/plasma-manager.git";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -40,11 +35,6 @@
       globalModules = [
         ./Modules/services/ssh.nix
         ./Modules/nh.nix
-        {
-          nixpkgs.overlays = [
-            hyprland.overlays.default
-          ];
-        }
       ];
 
       desktopModules = [
@@ -53,6 +43,12 @@
         ./Modules/environment.nix
         ./Modules/services/dae.nix
         hyprland.nixosModules.default
+
+        {
+          nixpkgs.overlays = [
+            hyprland.overlays.default
+          ];
+        }
 
         {
           programs.dms-shell = {
@@ -81,7 +77,6 @@
       ];
 
       hostDefs = {
-        "nixos"   = { type = "desktop"; dir = "desktop"; };
         "desktop" = { type = "desktop"; dir = "desktop"; };
         "laptop"  = { type = "desktop"; dir = "laptop"; };
         "server"  = { type = "server";  dir = "server"; };
