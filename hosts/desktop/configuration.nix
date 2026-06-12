@@ -51,11 +51,17 @@
   # ── Networking ──
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
-  networking.defaultGateway = {
-    address = "192.168.5.8";
-    interface = "enp5s0";
+  systemd.services.fix-gw = {
+    description = "Route default gateway via 192.168.5.8";
+    after = [ "NetworkManager.service" "network-online.target" ];
+    requires = [ "network-online.target" ];
+    serviceConfig = {
+      Type = "oneshot";
+      RemainAfterExit = true;
+      ExecStart = "${pkgs.iproute2}/bin/ip route replace default via 192.168.5.8";
+    };
+    wantedBy = [ "multi-user.target" ];
   };
-  networking.defaultGateway6 = "";
 
   # ── Nix ──
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -64,3 +70,4 @@
 
   system.stateVersion = "24.11";
 }
+
