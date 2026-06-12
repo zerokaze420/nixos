@@ -1,11 +1,7 @@
-{
-  config,
-  pkgs,
-  ...
-}:
+{ config, pkgs, lib, ... }:
 {
   services.dae = {
-    enable = false;
+    enable = true;
     configFile = "/home/tux/config/dae/config.dae";
   };
 }
