@@ -51,6 +51,11 @@
   # ── Networking ──
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  networking.defaultGateway = {
+    address = "192.168.5.8";
+    interface = "enp5s0";
+  };
+  networking.defaultGateway6 = "";
 
   # ── Nix ──
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
