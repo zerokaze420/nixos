@@ -51,6 +51,16 @@
   # ── Networking ──
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
+  programs.ssh.knownHosts = {
+    "lzcos.heiyu.space" = {
+      hostNames = [ "lzcos.heiyu.space" "[lzcos.heiyu.space]" ];
+      publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAID2lNS/7bNz4rRTtAXUrIYv3eLgd7ZPAhD+HHhNx7uIN";
+    };
+  };
+  programs.ssh.extraConfig = ''
+    Host lzcos.heiyu.space
+      Port 144
+  '';
   systemd.services.fix-gw = {
     description = "Route default gateway via 192.168.5.8";
     after = [ "NetworkManager.service" "network-online.target" ];
@@ -71,7 +81,6 @@
   nix.distributedBuilds = true;
   nix.buildMachines = [{
     hostName = "lzcos.heiyu.space";
-    port = 144;
     system = "x86_64-linux";
     maxJobs = 4;
     speedFactor = 2;

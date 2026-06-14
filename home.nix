@@ -14,6 +14,7 @@
     ./homeModules/desktop/hyprland.nix
     ./homeModules/desktop/niri.nix
     ./homeModules/desktop/plasma.nix
+    ./homeModules/ssh.nix
   ];
 
   home.packages = with pkgs; [
