@@ -66,7 +66,26 @@
   # ── Nix ──
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.settings.auto-optimise-store = true;
+
+  # ── Remote Builder ──
+  nix.distributedBuilds = true;
+  nix.buildMachines = [{
+    hostName = "lzcos.heiyu.space";
+    port = 144;
+    system = "x86_64-linux";
+    maxJobs = 4;
+    speedFactor = 2;
+    sshUser = "tux";
+    supportedFeatures = [ "kvm" "big-parallel" ];
+  }];
+  nix.extraOptions = ''
+    builders-use-substitutes = true
+  '';
   nixpkgs.config.allowUnfree = true;
+
+  services.lazycat-cloud-client = {
+    enable = true;
+  };
 
   system.stateVersion = "24.11";
 }

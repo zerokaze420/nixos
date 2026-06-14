@@ -412,7 +412,41 @@
         "type": "github"
       }
     },
+    "lazycat-cloud-client": {
+      "inputs": {
+        "nixpkgs": "nixpkgs"
+      },
+      "locked": {
+        "lastModified": 1781340982,
+        "narHash": "sha256-l34QC04DR6UVXB5n9DhIIeqy+8s/PppQjVomX8IxUfY=",
+        "owner": "zerokaze420",
+        "repo": "lazycat-cloud-client-flake",
+        "rev": "cd7231cb86d63799455b335b536217fc157ffa9d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zerokaze420",
+        "repo": "lazycat-cloud-client-flake",
+        "type": "github"
+      }
+    },
     "nixpkgs": {
+      "locked": {
+        "lastModified": 1781074563,
+        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
+    "nixpkgs_2": {
       "locked": {
         "lastModified": 1780749050,
         "narHash": "sha256-3av0pIjlOWQ6rDbNOmpUSvbNnJkGORQKKjb4LtCZsIY=",
@@ -478,7 +512,8 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
-        "nixpkgs": "nixpkgs",
+        "lazycat-cloud-client": "lazycat-cloud-client",
+        "nixpkgs": "nixpkgs_2",
         "plasma-manager": "plasma-manager"
       }
     },

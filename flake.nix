@@ -19,6 +19,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
+
+    lazycat-cloud-client.url = "github:zerokaze420/lazycat-cloud-client-flake";
   };
 
   outputs =
@@ -27,6 +29,7 @@
     , home-manager
     , hyprland
     , plasma-manager
+    , lazycat-cloud-client
     , ...
     }@inputs:
     let
@@ -43,10 +46,12 @@
         ./Modules/environment.nix
         ./Modules/services/dae.nix
         hyprland.nixosModules.default
+        lazycat-cloud-client.nixosModules.default
 
         {
           nixpkgs.overlays = [
             hyprland.overlays.default
+            lazycat-cloud-client.overlays.default
           ];
         }
 
@@ -65,7 +70,10 @@
           home-manager = {
             useGlobalPkgs = true;
             useUserPackages = true;
-            sharedModules = [ plasma-manager.homeModules.plasma-manager ];
+            sharedModules = [
+              plasma-manager.homeModules.plasma-manager
+              lazycat-cloud-client.homeManagerModules.default
+            ];
             users.tux.imports = [ ./home.nix ];
             extraSpecialArgs = {
               inherit inputs;
